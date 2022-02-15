@@ -1,0 +1,40 @@
+ <script>
+
+ 	let entrada = 0;
+ 	let operacao = "";
+ 	let acumulador = 0
+ 	let teste = true
+ 	let saida = "";
+
+	while(teste) {
+		entrada = parseFloat(prompt("Insira um número"));
+		operacao = prompt("Insira uma operação");
+		acumulador = parseFloat(prompt("Insira outro número"));
+			switch (operacao) {
+				case (operacao = "+"):
+				 acumulador += entrada;
+				 break;
+				case (operacao = "-"):
+				 acumulador -= entrada;
+				 break;
+				case (operacao = "*"):
+				 acumulador *= entrada;
+				 break;
+				case (operacao = "/"):
+				  entrada /= acumulador;
+				  acumulador = entrada;
+				 break;
+				case (operacao = "**"):
+				 acumulador **= entrada;
+				 break;
+				 default:
+				  alert("Operação inválida");}
+		alert ("O resultado é " + acumulador);
+		saida = prompt("Deseja sair?");
+			if (saida == "sim") {
+			teste = false
+			} else {
+				teste = true
+			}
+	 }
+</script>
