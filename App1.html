@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+	<head>Social<b style="color:blue">Boris</b></head>
+	<br><br>
+<body>
+	<div style='background-color:darkgray;width:50%;float:left'>
+		@
+		<select id="usrAtivo">
+		</select>
+		<p><b>Novo</b><b style="color:blue;">Usuário</b></p>
+		@<input type="text" id="usuario"> 
+		<input type="button" value="Criar Usuário" onclick="criarUsuario()" style="color:blue">
+		<br>
+		<p>Cor do Usuário: <input type="color" id ="usrCor"></p>
+		<br>
+		<br>
+		<p>Mensagem: <textarea id="msg"></textarea></p>
+		<input type="button" value= "Enviar" style="color:grey" onclick="enviarMensagem()">
+		<br><br>
+	</div>
+	<div style='background-color:aliceblue ;width:50%;float:right'>
+		<p><b>Usuários</b><b style="color:green;"> ativos</b><b>:</b></p>
+		<p id="online"></p>
+		<br>
+		<p><b style="color:seagreen;">Chat</b></p>
+		<p id="chat"></p>
+	</div>
+</body>
+<script>
+	
+	let aUsuarios = [];
+	let totalUsuarios = 0;
+    let usrId;
+	
+	function enviarMensagem(){
+		let mensagem = document.getElementById("msg").value;
+		usrId = document.getElementById("usrAtivo").value;
+		document.getElementById("chat").innerHTML += mensagem + "<p style='color:" + aUsuarios[usrId].cor +"'>@" + aUsuarios[usrId].nome + "</p>";
+	}
+	function criarUsuario() {
+		let usuario = document.getElementById("usuario").value;
+		let usrCor = document.getElementById("usrCor").value;
+		let usr = {nome:usuario, cor:usrCor};
+		
+		document.getElementById("usrAtivo").innerHTML += "<option value='" + totalUsuarios + "'>" + usuario + "</option>";
+		document.getElementById("online").innerHTML += "<span style='color:"+ usrCor +"'>" + usuario + "</span><br>";
+		aUsuarios[totalUsuarios++] = usr;
+	}
+</script>
+</html>
