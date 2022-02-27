@@ -30,7 +30,7 @@
 	
 	let aUsuarios = [];
 	let totalUsuarios = 0;
-    let usrId;
+	let usrId;
 	
 	function enviarMensagem(){
 		let mensagem = document.getElementById("msg").value;
@@ -41,7 +41,6 @@
 		let usuario = document.getElementById("usuario").value;
 		let usrCor = document.getElementById("usrCor").value;
 		let usr = {nome:usuario, cor:usrCor};
-		
 		document.getElementById("usrAtivo").innerHTML += "<option value='" + totalUsuarios + "'>" + usuario + "</option>";
 		document.getElementById("online").innerHTML += "<span style='color:"+ usrCor +"'>" + usuario + "</span><br>";
 		aUsuarios[totalUsuarios++] = usr;
