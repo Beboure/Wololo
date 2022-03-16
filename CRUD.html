@@ -1,0 +1,55 @@
+<!doctype html>
+<html style="background-color:black">
+<head>
+</head>
+<body>
+	<div style='background-color:;width:50%;float:left'>
+		<b style="color:green">C.R.U.D_Project</b>
+		<br><p style="color:green">Nome:<input type="text" id="dt1"></p>
+		<br><p style="color:green">E-mail:<input type="text" id="dt2"></p>
+		<br><p style="color:green">Endereço:<input type="text" id="dt3"></p>
+		<br><p style="color:green">Contato:<input type="text" id="dt4"></p>
+		<br><br><input type="button" value="Cadastrar" onclick="cadastrar()">
+		<br><br><b style="color:green"> Usuários:</b>
+		<br><p style="color:green" id="usrCadastrados"></p>
+	</div>
+	<div style='background-color:;width:50%;float:right'>
+		<br><br><b style="color:green">Nome:</b> <span style="color:green" id="cd1"></span>
+		<br><br><b style="color:green">E-mail:</b> <span style="color:green" id="cd2"></span>
+		<br><br><b style="color:green">Endereço:</b> <span style="color:green" id="cd3"></span>
+		<br><br><b style="color:green">Contato:</b> <span style="color:green" id="cd4"></span>
+	</div>
+</body>
+
+<script>
+
+	let aCadastros = [];
+	let usrOn = "";
+	
+	function atualizar() {
+		for (let i = 0; i < aCadastros.length; i++) {
+			usrOn += "<button onclick='apagar'(" + i + ")>-</button><span onclick='mostrarCadastro(" + i + ")'>" + aCadastros[i].nome + "</span><br>";
+			document.getElementById("usrCadastrados").innerHTML = usrOn;
+		} 
+	}
+
+	function cadastrar() {
+		let nome = document.getElementById("dt1").value;
+		let email = document.getElementById("dt2").value;
+		let endereço = document.getElementById("dt3").value;
+		let contato = document.getElementById("dt4").value;
+		let usr = {nome:nome ,email:email ,endereço:endereço ,contato:contato};
+		
+		aCadastros.push(usr);
+		atualizar();
+	}
+
+	function mostrarCadastro(selecionado) {
+		document.getElementById("cd1").innerHTML = aCadastros[selecionado].nome; 
+		document.getElementById("cd2").innerHTML = aCadastros[selecionado].email;		
+		document.getElementById("cd3").innerHTML = aCadastros[selecionado].endereço;
+		document.getElementById("cd4").innerHTML = aCadastros[selecionado].contato;
+	}
+
+</script>
+</html>
