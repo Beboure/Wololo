@@ -19,28 +19,30 @@
 		<br><br><b style="color:green">E-mail:</b> <span style="color:green" id="cd2"></span>
 		<br><br><b style="color:green">Endereço:</b> <span style="color:green" id="cd3"></span>
 		<br><br><b style="color:green">Contato:</b> <span style="color:green" id="cd4"></span>
+		<br><br><button onclick="editarCadastro()" id="editor">Editar</button>
 	</div>
 </body>
 
 <script>
 
 	let aCadastros = [];
+	let modoEdiçao = false;
+	let usuario;
 
 	function atualizar() {
 		let usrOn = '';
 
 		if (aCadastros == []) {
 			usrOn = "";
-		} 	else {
-				for (let i = 0; i < aCadastros.length; i++) {
-					usrOn += "<button onclick='apagar(" + i + ")'>-</button><span onclick='mostrarCadastro(" + i + ")'>" + aCadastros[i].nome + "</span><br>";
-				
+		} else {
+			for (let i = 0; i < aCadastros.length; i++) {
+				usrOn += "<button onclick='apagar(" + i + ")'>-</button><span onclick='mostrarCadastro(" + i + ")'>" + aCadastros[i].nome + "</span><br>";
 				}
 			} document.getElementById("usrCadastrados").innerHTML = usrOn;
 	}
 
-	function apagar(usuario) {
-		aCadastros.splice(usuario,1);
+	function apagar(selecionado) {
+		aCadastros.splice(selecionado,1);
 		atualizar();
 	}
 
@@ -56,10 +58,33 @@
 	}
 
 	function mostrarCadastro(selecionado) {
+		usuario = selecionado;
 		document.getElementById("cd1").innerHTML = aCadastros[selecionado].nome; 
-		document.getElementById("cd2").innerHTML = aCadastros[selecionado].email;		
+		document.getElementById("cd2").innerHTML = aCadastros[selecionado].email;
 		document.getElementById("cd3").innerHTML = aCadastros[selecionado].endereço;
 		document.getElementById("cd4").innerHTML = aCadastros[selecionado].contato;
+	}
+
+	function editarCadastro() {
+		if (modoEdiçao == !true) {
+			document.getElementById("cd1").innerHTML = "<input value='" + aCadastros[usuario].nome + "' id='ed1'>";
+			document.getElementById("cd2").innerHTML = "<input value='" + aCadastros[usuario].email + "' id='ed2'>";
+			document.getElementById("cd3").innerHTML = "<input value='" + aCadastros[usuario].endereço + "' id='ed3'>";
+			document.getElementById("cd4").innerHTML = "<input value='" + aCadastros[usuario].contato + "' id='ed4'>";
+			document.getElementById("editor").innerHTML = "<button onclick='editarCadastro' id='editor'>Finalizar</button>"
+			modoEdiçao = true;
+		} else {
+			aCadastros[usuario].nome = document.getElementById("ed1").value;
+			aCadastros[usuario].email = document.getElementById("ed2").value;
+			aCadastros[usuario].endereço = document.getElementById("ed3").value;
+			aCadastros[usuario].contato = document.getElementById("ed4").value;
+			document.getElementById("cd1").innerHTML = aCadastros[usuario].nome; 
+			document.getElementById("cd2").innerHTML = aCadastros[usuario].email;
+			document.getElementById("cd3").innerHTML = aCadastros[usuario].endereço;
+			document.getElementById("cd4").innerHTML = aCadastros[usuario].contato;
+			document.getElementById("editor").innerHTML = "<button onclick='editarCadastro' id='editor'>Editar</button>"
+			modoEdiçao = false;
+		}
 	}
 
 </script>
