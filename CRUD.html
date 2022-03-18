@@ -1,16 +1,17 @@
 <!doctype html>
 <html style="background-color:black">
 <head>
+	<title></title>
 </head>
 <body>
+	<h1><b style="color:green">C.R.U.D_Project</b></h1>
 	<div style='background-color:;width:50%;float:left'>
-		<b style="color:green">C.R.U.D_Project</b>
 		<br><p style="color:green">Nome:<input type="text" id="dt1"></p>
 		<br><p style="color:green">E-mail:<input type="text" id="dt2"></p>
 		<br><p style="color:green">Endereço:<input type="text" id="dt3"></p>
 		<br><p style="color:green">Contato:<input type="text" id="dt4"></p>
 		<br><br><input type="button" value="Cadastrar" onclick="cadastrar()">
-		<br><br><b style="color:green"> Usuários:</b>
+		<br><br><h2 style="color:green"> Usuários:</h2>
 		<br><p style="color:green" id="usrCadastrados"></p>
 	</div>
 	<div style='background-color:;width:50%;float:right'>
@@ -24,13 +25,23 @@
 <script>
 
 	let aCadastros = [];
-	let usrOn = "";
-	
+
 	function atualizar() {
-		for (let i = 0; i < aCadastros.length; i++) {
-			usrOn += "<button onclick='apagar'(" + i + ")>-</button><span onclick='mostrarCadastro(" + i + ")'>" + aCadastros[i].nome + "</span><br>";
-			document.getElementById("usrCadastrados").innerHTML = usrOn;
-		} 
+		let usrOn = '';
+
+		if (aCadastros == []) {
+			usrOn = "";
+		} 	else {
+				for (let i = 0; i < aCadastros.length; i++) {
+					usrOn += "<button onclick='apagar(" + i + ")'>-</button><span onclick='mostrarCadastro(" + i + ")'>" + aCadastros[i].nome + "</span><br>";
+				
+				}
+			} document.getElementById("usrCadastrados").innerHTML = usrOn;
+	}
+
+	function apagar(usuario) {
+		aCadastros.splice(usuario,1);
+		atualizar();
 	}
 
 	function cadastrar() {
