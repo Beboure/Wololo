@@ -1,0 +1,110 @@
+<!doctype html>
+<html style="background-color:black">
+<head>
+	<title>Batalha Naval: PTDE</title>
+</head>
+<body>
+
+	<h1 style="color:ghostwhite;">Batalha Naval: Prepare to Die Edition</h1>
+
+	<div style="width:50%;float:left">
+		<br><br><b style="color:ghostwhite;">X: </b><input id="x">
+		<br><br><b style="color:ghostwhite;">Y: </b><input id="y">
+		<br><br><button onclick="disparar()">Disparar</button>
+		<br><br><h2 style="color:ghostwhite" id="tentativas">Tentativas:20</h2>
+		<br><h2 style="color:ghostwhite" id="msg">Boa Sorte...</h2>
+		<br><br>
+	</div>
+	<div style="width:50%;float:right">
+		<table border="1" style="background-color:royalblue;" id="mapa"></table> 
+	</div>
+</body>
+<script>
+
+
+	let mapa = [];
+	let initMapa = "";
+	
+	for (i = 0; i < 10; i++) {
+		mapa[i] = [];
+		for (j = 0; j < 10; j++) {
+			mapa[i][j] = 0
+		}
+	}
+
+	for(i = 0; i < 10; i++) {
+		initMapa += "<tr>"
+		for(j = 0; j < 10; j++) {
+			initMapa += "<td style='padding: 30px'></td>"
+		}
+	} initMapa += "</tr>"			
+	document.getElementById("mapa").innerHTML = initMapa;
+
+
+	let x1n = Math.floor(Math.random()*10);
+	let y1n = Math.floor(Math.random()*10);
+	let x2n = (x1n == 10)?x1n - 1:x1n + 1;
+	let y2n = (y1n == 10)?y1n - 1:y1n + 1;
+	let x1pa = Math.floor(Math.random()*10);
+	let y1pa = Math.floor(Math.random()*10);
+	let x2pa = x1pa;
+	let y2pa = (y1pa == 10)?y1pa - 1:y1pa + 1;
+	let x3pa = x1pa;
+	let y3pa = (y2pa == 10)?y2pa - 2:y2pa + 1;
+	let tentativa = 20;
+
+	function disparar() {
+		
+		if (tentativa == 0) {
+			document.getElementById("msg").innerHTML = "Encerraram as tentativas...<br><br><b>VOCÊ MORREU</b>";
+			} else {
+				--tentativa
+				let x = document.getElementById("x").value;
+				let y = document.getElementById("y").value;
+				let dn1 = Math.sqrt((x - x1n)*(x - x1n) + (y - y1n)*(y - y2n));
+				let dn2 = Math.sqrt((x - x2n)*(x - x2n) + (y - y2n)*(y - y2n));
+				let dpa1 = Math.sqrt((x - x1pa)*(x - x1pa) + (y - y1pa)*(y - y1pa));
+				let dpa2 = Math.sqrt((x - x2pa)*(x - x2pa) + (y - y2pa)*(y - y2pa));
+				let dpa3 = Math.sqrt((x - x3pa)*(x - x3pa) + (y - y3pa)*(y - y3pa));
+				
+				if (dn1 == 0 || dn2 == 0 || dpa1 == 0 ||  dpa2  == 0 || dpa3 == 0) {
+					mapa[x][y] = 2
+				} else {
+					mapa[x][y] = 1
+					document.getElementById("msg").innerHTML = "Distância do Navio: " + dn2 + "<br><br>Distância do Porta-aviões: " + dpa2;
+					document.getElementById("tentativas").innerHTML = "Tentativas:" + tentativa;
+			}
+			atualizar();
+}
+
+	}
+
+	function atualizar() {
+
+		let attMapa = "";
+
+		for(i = 0; i < 10; i++) {
+			attMapa += "<tr>"
+			for(j = 0; j < 10; j++) {
+				switch (mapa[i][j]) {
+					case 0:
+						attMapa += "<td style='padding: 30px'></td>"
+						break;
+
+					case 1:
+						attMapa += "<td style='padding: 30px;background-color:black'></td>"		
+						break;
+
+					case 2:
+						attMapa += "<td style='padding: 30px;background-color:green'></td>"		
+						break;
+				}
+				
+			}
+		} attMapa += "</tr>"
+		document.getElementById("mapa").innerHTML = attMapa;
+		
+	}
+
+</script>
+</html>
