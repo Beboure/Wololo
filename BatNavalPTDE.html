@@ -43,14 +43,14 @@
 
 	let x1n = Math.floor(Math.random()*10);
 	let y1n = Math.floor(Math.random()*10);
-	let x2n = (x1n == 10)?x1n - 1:x1n + 1;
-	let y2n = (y1n == 10)?y1n - 1:y1n + 1;
+	let x2n = (x1n == 9)?x1n - 1:x1n + 1;
+	let y2n = (y1n == 9)?y1n - 1:y1n + 1;
 	let x1pa = Math.floor(Math.random()*10);
 	let y1pa = Math.floor(Math.random()*10);
 	let x2pa = x1pa;
-	let y2pa = (y1pa == 10)?y1pa - 1:y1pa + 1;
+	let y2pa = (y1pa == 9)?y1pa - 1:y1pa + 1;
 	let x3pa = x1pa;
-	let y3pa = (y2pa == 10)?y2pa - 2:y2pa + 1;
+	let y3pa = (y2pa == 9)?y2pa - 2:y2pa + 1;
 	let tentativa = 20;
 
 	function disparar() {
@@ -75,8 +75,7 @@
 					document.getElementById("tentativas").innerHTML = "Tentativas:" + tentativa;
 			}
 			atualizar();
-}
-
+		}	
 	}
 
 	function atualizar() {
