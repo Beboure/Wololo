@@ -1,0 +1,124 @@
+<!doctype html>
+<html style="background-color:black;">
+<head>
+	<title>Calculadora|REMASTERED</title>
+</head>
+<body>
+
+	<h1 style="text-align:center;color:ghostwhite;">Calculadora: REMASTERED</h1>
+
+	<style>
+		td {
+			padding:  5px;
+		}
+	</style>
+
+<div style="float:right;width:58%;">
+	<table border=1 style="background-color:black;">
+
+		<tr><td colspan=4 style="text-align:right;background-color:greenyellow;" id="=">__________</td></tr>
+ 
+		<tr><td onclick="selecOp('+')" style="background-color:orange;">+</td><td onclick="selecN(7)" style="background-color:floralwhite;">7</td><td onclick="selecN(8)" style="background-color:floralwhite;">8</td><td onclick="selecN(9)" style="background-color:floralwhite;">9</td></tr>
+
+		<tr><td onclick="selecOp('-')" style="background-color:orange;">-</td><td onclick="selecN(4)" style="background-color:floralwhite;">4</td><td onclick="selecN(5)" style="background-color:floralwhite;">5</td><td onclick="selecN(6)" style="background-color:floralwhite;">6</td></tr>
+
+		<tr><td onclick="selecOp('*')" style="background-color:orange;">*</td><td onclick="selecN(1)" style="background-color:floralwhite;">1</td><td onclick="selecN(2)" style="background-color:floralwhite;">2</td><td onclick="selecN(3)" style="background-color:floralwhite;">3</td></tr>
+
+		<tr><td onclick="selecOp('/')" style="background-color:orange;">/</td><td onclick="limpar()" style="background-color:grey;">C</td><td onclick="selecN(0)" style="background-color:floralwhite;">0</td><td onclick="enter()" style="background-color:grey;">E</td></tr>
+	</table>
+</div>
+
+</body>
+
+	<script>
+
+		let n1 = "";
+		let n2 = "";
+		let op = "";
+		let semOp = true;
+		let acumulador = false;
+
+		function selecN(n) {
+			if (semOp == true){
+				n1 += n;
+				document.getElementById("=").innerHTML = n1;
+			} else { 
+				if (acumulador == true) {
+					n1 += n;
+					document.getElementById("=").innerHTML = n1;
+				} else {
+					n2 += n;
+					n1 = parseInt(n1);
+					document.getElementById("=").innerHTML = n1 + op + n2;
+				}
+			}
+		}
+
+		function selecOp(selected) {
+			op = selected;
+			document.getElementById("=").innerHTML = n1 + op;
+			semOp = false;
+		}
+
+		function enter() {
+			if (acumulador == false) {
+				switch (op) {
+					case (op = "+"):
+						n1 += parseInt(n2);
+						resultado = n1;
+						n1 = "";
+						n2 = "";
+						break;
+					case (op = "-"):
+						n1 -= parseInt(n2);
+						resultado = n1;
+						n1 = "";
+						n2 = "";
+						break;
+					case (op = "*"):
+						n1 *= parseInt(n2);
+						resultado = n1;
+						n1 = "";
+						n2 = "";
+						break;
+					case (op = "/"):
+						n1 /= parseInt(n2);
+						resultado = n1;
+						n1 = "";
+						n2 = "";
+						break;
+				} 
+			} else {
+				switch (op) {
+					case (op = "+"):
+						resultado += parseInt(n1);
+						n1 = "";
+						break;
+					case (op = "-"):
+						resultado -= parseInt(n1);
+						n1 = "";
+						break;
+					case (op = "*"):
+						resultado *= parseInt(n1);
+						n1 = "";
+						break;
+					case (op = "/"):
+						resultado /= parseInt(n1);
+						n1 = "";
+						break;
+				}
+			}
+			document.getElementById("=").innerHTML = "= " + resultado; 
+			semOp = true;
+			acumulador = true;
+		}
+
+		function limpar() {
+			x = "";
+			y = "";
+			document.getElementById("=").innerHTML = "__________";
+			acumulador = false;
+		}
+
+</script>		 
+</html>
